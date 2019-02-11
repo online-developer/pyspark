@@ -1,0 +1,1 @@
+config[“logger_config”][“logging_config_path”] = .”/foo/bar”
