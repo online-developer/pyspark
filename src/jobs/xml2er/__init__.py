@@ -1,6 +1,10 @@
 from pyspark.sql import SQLContext
-from spark.xml import df_from_rdd
+from shared.spark.xml.normalizer import df_from_rdd
+from shared.spark.xml.normalizer import normalize_rdd
 from shared.context import JobContext
+from .schema import app_schema
+from .schema import namespace
+from .schema import relationships
 import os
 
 
@@ -20,6 +24,13 @@ def analyze(sc, **kwargs):
     cols = ['table', 'columns']
     cwd = os.environ.get('PYSPARK_JOB_DIR')
     rdd = sc.wholeTextFiles(os.path.join(cwd, 'agent.xml'))
-    schema_file = os.path.join(cwd, 'agent.json')
-    df = df_from_rdd(rdd, cols, row_num, sql, schema_file)
-    df.show()
+    # schema_file = os.path.join(cwd, 'agent.json')
+    df = df_from_rdd(
+           normalize_rdd(
+             rdd, cols, app_schema, namespace, relationships
+           ),
+           cols,
+           sql
+    )
+
+    df.show(20, False)

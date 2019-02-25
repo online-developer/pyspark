@@ -14,9 +14,9 @@ prog=${prog%%.*}
 packages="com.databricks:spark-csv_2.11:1.5.0"
 pyfiles=""
 
-if [[ -e "$pwd/src/log4j.properties" ]]; then
-   export SPARK_CONF_DIR="$pwd/src/log4j.properties"
-fi
+# if [[ -e "$pwd/src/log4j.properties" ]]; then
+#    export SPARK_CONF_DIR="$pwd/src/log4j.properties"
+# fi
 
 cd $pwd/src
 if [[ -e "job.zip" ]]; then

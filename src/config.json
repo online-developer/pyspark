@@ -1,1 +1,5 @@
-config[“logger_config”][“logging_config_path”] = .”/foo/bar”
+{
+   “logger_config”: {
+      “path” : ”/foo/bar”
+    }
+}
